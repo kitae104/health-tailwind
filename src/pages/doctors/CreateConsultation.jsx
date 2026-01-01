@@ -115,37 +115,31 @@ const CreateConsultation = () => {
 
     if (error && !appointment) {
         return (
-            <div className="container">
-                <div className="form-container">
-                    <div className="alert alert-error">{error}</div>
-                    <button onClick={handleCancel} className="btn btn-secondary">
-                        예약으로 돌아가기
-                    </button>
+            <div className="min-h-[70vh] flex items-center justify-center">
+                <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md text-center">
+                    <div className="bg-red-100 border border-red-200 text-red-700 p-3 rounded mb-4">{error}</div>
+                    <button onClick={handleCancel} className="bg-gray-300 text-gray-800 px-4 py-2 rounded">예약으로 돌아가기</button>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="container">
-            <div className="form-container">
-                <h2 className="form-title">상담 기록 생성</h2>
+        <div className="min-h-[70vh] flex items-center justify-center">
+            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl">
+                <h2 className="text-2xl font-semibold text-center mb-6">상담 기록 생성</h2>
                 {error && (
-                    <div className="alert alert-error">
-                        {error}
-                    </div>
+                    <div className="bg-red-100 border border-red-200 text-red-700 p-3 rounded mb-4 text-center">{error}</div>
                 )}
 
                 {success && (
-                    <div className="alert alert-success">
-                        {success}
-                    </div>
+                    <div className="bg-green-100 border border-green-200 text-green-700 p-3 rounded mb-4 text-center">{success}</div>
                 )}
 
                 {appointment && (
-                    <div className="consultation-header-info">
-                        <h3>예약 정보</h3>
-                        <div className="appointment-summary">
+                    <div className="mb-4 p-4 bg-gray-50 rounded border-l-4 border-[#3498db]">
+                        <h3 className="font-semibold mb-2">예약 정보</h3>
+                        <div>
                             <p><strong>환자:</strong> {appointment.patient.lastName} {appointment.patient.firstName}</p>
                             <p><strong>날짜:</strong> {formatDateTime(appointment.startTime)}</p>
                             <p><strong>목적:</strong> {appointment.purposeOfConsultation}</p>
@@ -155,73 +149,73 @@ const CreateConsultation = () => {
                 )}
 
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label className="form-label">주관적 소견</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">주관적 소견</label>
                         <textarea
                             name="subjectiveNotes"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.subjectiveNotes}
                             onChange={handleChange}
                             placeholder="환자가 호소하는 증상, 병력 및 우려사항을 입력하세요..."
                             rows="4"
                             required
                         />
-                        <small className="form-help">환자의 주관적 증상 및 병력</small>
+                        <small className="text-gray-500">환자의 주관적 증상 및 병력</small>
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">객관적 소견</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">객관적 소견</label>
                         <textarea
                             name="objectiveFindings"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.objectiveFindings}
                             onChange={handleChange}
                             placeholder="신체검진 소견, 활력징후, 검사 결과 등을 입력하세요..."
                             rows="4"
                             required
                         />
-                        <small className="form-help">객관적 관찰 및 검사 소견</small>
+                        <small className="text-gray-500">객관적 관찰 및 검사 소견</small>
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">평가</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">평가</label>
                         <textarea
                             name="assessment"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.assessment}
                             onChange={handleChange}
                             placeholder="진단명, 감별진단, 임상 소견 등을 입력하세요..."
                             rows="3"
                             required
                         />
-                        <small className="form-help">임상적 평가 및 진단</small>
+                        <small className="text-gray-500">임상적 평가 및 진단</small>
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">치료 계획</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">치료 계획</label>
                         <textarea
                             name="plan"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.plan}
                             onChange={handleChange}
                             placeholder="치료 권고사항, 약물, 추적 계획 등을 입력하세요..."
                             rows="3"
                             required
                         />
-                        <small className="form-help">치료 계획 및 권고사항</small>
+                        <small className="text-gray-500">치료 계획 및 권고사항</small>
                     </div>
 
-                    <div className="form-actions">
+                    <div className="flex gap-3 justify-end mt-4">
                         <button
                             type="button"
-                            className="btn btn-secondary"
+                            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
                             onClick={handleCancel}
                         >
                             취소
                         </button>
                         <button
                             type="submit"
-                            className="btn btn-primary"
+                            className="bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white px-4 py-2 rounded font-semibold disabled:opacity-60"
                             disabled={loading}
                         >
                             {loading ? '생성 중...' : '상담 생성'}

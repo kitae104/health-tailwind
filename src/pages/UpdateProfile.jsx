@@ -106,42 +106,38 @@ const UpdateProfile = () => {
     };
 
     return (
-        <div className="container">
-            <div className="form-container">
-                <h2 className="form-title">환자 프로필 수정</h2>
+        <div className="min-h-[70vh] flex items-center justify-center">
+            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl">
+                <h2 className="text-2xl font-semibold text-center mb-6">환자 프로필 수정</h2>
 
                 {error && (
-                    <div className="alert alert-error">
-                        {error}
-                    </div>
+                    <div className="bg-red-100 border border-red-200 text-red-700 p-3 rounded mb-4 text-center">{error}</div>
                 )}
 
                 {success && (
-                    <div className="alert alert-success">
-                        {success}
-                    </div>
+                    <div className="bg-green-100 border border-green-200 text-green-700 p-3 rounded mb-4 text-center">{success}</div>
                 )}
 
                 <form onSubmit={handleSubmit}>
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label className="form-label">이름</label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-[#2c3e50] mb-2">이름</label>
                             <input
                                 type="text"
                                 name="firstName"
-                                className="form-input"
+                                className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-[#3498db] focus:ring-1 focus:ring-[#3498db]/10"
                                 value={formData.firstName}
                                 onChange={handleChange}
                                 placeholder="이름을 입력하세요"
                                 required
                             />
                         </div>
-                        <div className="form-group">
-                            <label className="form-label">성</label>
+                        <div>
+                            <label className="block text-sm font-medium text-[#2c3e50] mb-2">성</label>
                             <input
                                 type="text"
                                 name="lastName"
-                                className="form-input"
+                                className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-[#3498db] focus:ring-1 focus:ring-[#3498db]/10"
                                 value={formData.lastName}
                                 onChange={handleChange}
                                 placeholder="성을 입력하세요"
@@ -150,12 +146,12 @@ const UpdateProfile = () => {
                         </div>
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">전화번호</label>
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">전화번호</label>
                         <input
                             type="tel"
                             name="phone"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-[#3498db] focus:ring-1 focus:ring-[#3498db]/10"
                             value={formData.phone}
                             onChange={handleChange}
                             placeholder="전화번호를 입력하세요"
@@ -163,24 +159,24 @@ const UpdateProfile = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">생년월일</label>
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">생년월일</label>
                         <input
                             type="date"
                             name="dateOfBirth"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-[#3498db] focus:ring-1 focus:ring-[#3498db]/10"
                             value={formData.dateOfBirth}
                             onChange={handleChange}
                             required
                         />
                     </div>
 
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label className="form-label">혈액형</label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div>
+                            <label className="block text-sm font-medium text-[#2c3e50] mb-2">혈액형</label>
                             <select
                                 name="bloodGroup"
-                                className="form-select"
+                                className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-[#3498db] focus:ring-1 focus:ring-[#3498db]/10"
                                 value={formData.bloodGroup}
                                 onChange={handleChange}
                                 disabled={loadingEnums}
@@ -194,11 +190,11 @@ const UpdateProfile = () => {
                             </select>
                         </div>
 
-                        <div className="form-group">
-                            <label className="form-label">유전형</label>
+                        <div>
+                            <label className="block text-sm font-medium text-[#2c3e50] mb-2">유전형</label>
                             <select
                                 name="genotype"
-                                className="form-select"
+                                className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-[#3498db] focus:ring-1 focus:ring-[#3498db]/10"
                                 value={formData.genotype}
                                 onChange={handleChange}
                                 disabled={loadingEnums}
@@ -213,30 +209,30 @@ const UpdateProfile = () => {
                         </div>
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">알레르기 정보</label>
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">알레르기 정보</label>
                         <textarea
                             name="knownAllergies"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:border-[#3498db] focus:ring-1 focus:ring-[#3498db]/10"
                             value={formData.knownAllergies}
                             onChange={handleChange}
                             placeholder="알레르기가 있다면 쉼표로 구분하여 입력하세요"
                             rows="3"
                         />
-                        <small className="form-help">여러 알레르기는 쉼표로 구분하세요</small>
+                        <small className="text-gray-500">여러 알레르기는 쉼표로 구분하세요</small>
                     </div>
 
-                    <div className="form-actions">
+                    <div className="flex gap-3 justify-end mt-6">
                         <button
                             type="button"
-                            className="btn btn-secondary"
+                            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
                             onClick={handleCancel}
                         >
                             취소
                         </button>
                         <button
                             type="submit"
-                            className="btn btn-primary"
+                            className="bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white px-4 py-2 rounded font-semibold disabled:opacity-60"
                             disabled={loading}
                         >
                             {loading ? '업데이트 중...' : '프로필 업데이트'}

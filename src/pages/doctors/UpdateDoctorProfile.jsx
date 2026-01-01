@@ -90,41 +90,37 @@ const UpdateDoctorProfile = () => {
     };
 
     return (
-        <div className="container">
-            <div className="form-container">
-                <h2 className="form-title">의사 프로필 수정</h2>
+        <div className="min-h-[70vh] flex items-center justify-center">
+            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl">
+                <h2 className="text-2xl font-semibold text-center mb-6">의사 프로필 수정</h2>
                 {error && (
-                    <div className="alert alert-error">
-                        {error}
-                    </div>
+                    <div className="bg-red-100 border border-red-200 text-red-700 p-3 rounded mb-4 text-center">{error}</div>
                 )}
 
                 {success && (
-                    <div className="alert alert-success">
-                        {success}
-                    </div>
+                    <div className="bg-green-100 border border-green-200 text-green-700 p-3 rounded mb-4 text-center">{success}</div>
                 )}
 
                 <form onSubmit={handleSubmit}>
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label className="form-label">성</label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-[#2c3e50] mb-2">성</label>
                             <input
                                 type="text"
                                 name="lastName"
-                                className="form-input"
+                                className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                                 value={formData.lastName}
                                 onChange={handleChange}
                                 placeholder="성을 입력하세요"
                                 required
                             />
                         </div>
-                        <div className="form-group">
-                            <label className="form-label">이름</label>
+                        <div>
+                            <label className="block text-sm font-medium text-[#2c3e50] mb-2">이름</label>
                             <input
                                 type="text"
                                 name="firstName"
-                                className="form-input"
+                                className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                                 value={formData.firstName}
                                 onChange={handleChange}
                                 placeholder="이름을 입력하세요"
@@ -133,11 +129,11 @@ const UpdateDoctorProfile = () => {
                         </div>
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">전문 분야</label>
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">전문 분야</label>
                         <select
                             name="specialization"
-                            className="form-select"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.specialization}
                             onChange={handleChange}
                             required
@@ -151,21 +147,21 @@ const UpdateDoctorProfile = () => {
                             ))}
                         </select>
                         {loadingEnums && (
-                            <small className="form-help">전문 분야를 불러오는 중...</small>
+                            <small className="text-gray-500">전문 분야를 불러오는 중...</small>
                         )}
                     </div>
 
-                    <div className="form-actions">
+                    <div className="flex gap-3 justify-end mt-6">
                         <button
                             type="button"
-                            className="btn btn-secondary"
+                            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
                             onClick={handleCancel}
                         >
                             취소
                         </button>
                         <button
                             type="submit"
-                            className="btn btn-primary"
+                            className="bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white px-4 py-2 rounded font-semibold disabled:opacity-60"
                             disabled={loading}
                         >
                             {loading ? '업데이트 중...' : '프로필 업데이트'}

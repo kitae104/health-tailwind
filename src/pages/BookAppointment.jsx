@@ -114,28 +114,24 @@ const BookAppointment = () => {
     };
 
     return (
-        <div className="container">
-            <div className="form-container">
-                <h2 className="form-title">예약하기</h2>
+        <div className="min-h-[70vh] flex items-center justify-center">
+            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-xl">
+                <h2 className="text-2xl font-semibold text-center mb-6">예약하기</h2>
 
                 {error && (
-                    <div className="alert alert-error">
-                        {error}
-                    </div>
+                    <div className="bg-red-100 border border-red-200 text-red-700 p-3 rounded mb-4 text-center">{error}</div>
                 )}
 
                 {success && (
-                    <div className="alert alert-success">
-                        {success}
-                    </div>
+                    <div className="bg-green-100 border border-green-200 text-green-700 p-3 rounded mb-4 text-center">{success}</div>
                 )}
 
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label className="form-label">의사 선택</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">의사 선택</label>
                         <select
                             name="doctorId"
-                            className="form-select"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.doctorId}
                             onChange={handleChange}
                             required
@@ -149,16 +145,16 @@ const BookAppointment = () => {
                             ))}
                         </select>
                         {loadingDoctors && (
-                            <small className="form-help">의사 목록을 불러오는 중...</small>
+                            <small className="text-gray-500">의사 목록을 불러오는 중...</small>
                         )}
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">상담 목적</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">상담 목적</label>
                         <input
                             type="text"
                             name="purposeOfConsultation"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.purposeOfConsultation}
                             onChange={handleChange}
                             placeholder="상담이 필요한 이유를 간단히 입력하세요"
@@ -166,45 +162,45 @@ const BookAppointment = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">초기 증상</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">초기 증상</label>
                         <textarea
                             name="initialSymptoms"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.initialSymptoms}
                             onChange={handleChange}
                             placeholder="증상을 자세히 입력하세요"
                             rows="4"
                             required
                         />
-                        <small className="form-help">증상, 기간 및 심각도를 구체적으로 작성하세요</small>
+                        <small className="text-gray-500">증상, 기간 및 심각도를 구체적으로 작성하세요</small>
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">희망 날짜 및 시간</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">희망 날짜 및 시간</label>
                         <input
                             type="datetime-local"
                             name="startTime"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.startTime}
                             onChange={handleChange}
                             min={getMinDateTime()}
                             required
                         />
-                        <small className="form-help">원하시는 예약 날짜와 시간을 선택하세요</small>
+                        <small className="text-gray-500">원하시는 예약 날짜와 시간을 선택하세요</small>
                     </div>
 
-                    <div className="form-actions">
+                    <div className="flex gap-3 justify-end mt-3">
                         <button
                             type="button"
-                            className="btn btn-secondary"
+                            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
                             onClick={handleCancel}
                         >
                             취소
                         </button>
                         <button
                             type="submit"
-                            className="btn btn-primary"
+                            className="bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white px-4 py-2 rounded font-semibold disabled:opacity-60"
                             disabled={loading || loadingDoctors}
                         >
                             {loading ? '예약 중...' : '예약하기'}

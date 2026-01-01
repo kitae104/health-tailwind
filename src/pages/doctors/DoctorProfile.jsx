@@ -99,38 +99,37 @@ const DoctorProfile = () => {
 
     if (error) {
         return (
-            <div className="container">
-                <div className="form-container">
-                    <div className="alert alert-error">{error}</div>
+            <div className="max-w-6xl mx-auto px-5 py-8">
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                    <div className="bg-red-100 border border-red-200 text-red-700 p-3 rounded">{error}</div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="container">
-            <div className="profile-container">
-                <div className="profile-header">
-                    <div className="profile-header-main">
-                        <div className="profile-picture-section">
-                            <div className="profile-picture-container">
+        <div className="max-w-6xl mx-auto px-5 py-8">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white p-6">
+                    <div className="flex items-start gap-6 flex-wrap">
+                        <div className="flex-shrink-0">
+                            <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-lg">
                                 {getProfilePictureUrl() ? (
                                     <img
                                         src={getProfilePictureUrl()}
                                         alt="Profile"
-                                        className="profile-picture"
+                                        className="w-full h-full object-cover"
                                         onError={(e) => {
                                             e.target.style.display = 'none';
                                             e.target.nextSibling.style.display = 'flex';
                                         }}
                                     />
                                 ) : null}
-                                <div className={`profile-picture-placeholder ${getProfilePictureUrl() ? 'hidden' : ''}`}>
+                                <div className={`w-full h-full bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center text-white text-2xl font-bold ${getProfilePictureUrl() ? 'hidden' : ''}`}>
                                     {userData?.name?.charAt(0)?.toUpperCase() || 'D'}
                                 </div>
-
-                                <div className="profile-picture-overlay">
-                                    <label htmlFor="doctor-profile-picture-upload" className="upload-label">
+                                <div className="absolute left-0 right-0 bottom-0 bg-black/60 p-1 text-center opacity-0 hover:opacity-100 transition">
+                                    <label htmlFor="doctor-profile-picture-upload" className="text-white text-sm cursor-pointer">
                                         {uploading ? '업로드 중...' : '사진 변경'}
                                     </label>
                                     <input
@@ -145,96 +144,81 @@ const DoctorProfile = () => {
                             </div>
 
                             {uploadError && (
-                                <div className="alert alert-error mt-1">
+                                <div className="bg-red-100 border border-red-200 text-red-700 p-2 rounded mt-3 text-sm">
                                     {uploadError}
                                 </div>
                             )}
                             {uploadSuccess && (
-                                <div className="alert alert-success mt-1">
+                                <div className="bg-green-100 border border-green-200 text-green-700 p-2 rounded mt-3 text-sm">
                                     {uploadSuccess}
                                 </div>
                             )}
                         </div>
 
-                        <div className="profile-title-section">
-                            <h1 className="profile-title">의사 프로필</h1>
-                            <p className="profile-subtitle">Dr. {userData?.name}</p>
+                        <div className="flex-1 min-w-0">
+                            <h1 className="text-2xl font-semibold">의사 프로필</h1>
+                            <p className="text-white/90">Dr. {userData?.name}</p>
                             {doctorData && (
-                                <p className="profile-specialization">
-                                    {formatSpecialization(doctorData.specialization)}
-                                </p>
+                                <p className="text-white/90 italic">{formatSpecialization(doctorData.specialization)}</p>
                             )}
                         </div>
-                    </div>
-                    
-                    <div className="profile-actions">
-                        <button onClick={handleUpdateProfile} className="btn btn-primary">
-                            프로필 수정
-                        </button>
-                        <button onClick={handleUpdatePassword} className="btn btn-secondary">
-                            비밀번호 변경
-                        </button>
-                        <Link to="/doctor/appointments" className="btn btn-primary">
-                            내 예약
-                        </Link>
+
+                        <div className="flex gap-3 ml-auto flex-wrap">
+                            <button onClick={handleUpdateProfile} className="bg-white text-[#667eea] px-4 py-2 rounded-md font-semibold">프로필 수정</button>
+                            <button onClick={handleUpdatePassword} className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md">비밀번호 변경</button>
+                            <Link to="/doctor/appointments" className="bg-white text-[#667eea] px-4 py-2 rounded-md font-semibold">내 예약</Link>
+                        </div>
                     </div>
                 </div>
 
-                <div className="profile-content">
+                <div className="p-6">
                     {/* 사용자 정보 섹션 */}
-                    <div className="profile-section">
-                        <h2 className="section-title">계정 정보</h2>
-                        <div className="info-grid">
-                            <div className="info-item">
-                                <label className="info-label">이름</label>
-                                <div className="info-value">{userData?.name || '제공되지 않음'}</div>
+                    <div className="mb-6">
+                        <h2 className="text-xl font-semibold mb-4 border-l-4 border-[#3498db] pl-4">계정 정보</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <div className="text-sm text-gray-600">이름</div>
+                                <div className="mt-1 p-3 bg-gray-50 rounded">{userData?.name || '제공되지 않음'}</div>
                             </div>
-                            <div className="info-item">
-                                <label className="info-label">이메일</label>
-                                <div className="info-value">{userData?.email || '제공되지 않음'}</div>
+                            <div>
+                                <div className="text-sm text-gray-600">이메일</div>
+                                <div className="mt-1 p-3 bg-gray-50 rounded">{userData?.email || '제공되지 않음'}</div>
                             </div>
-                            <div className="info-item">
-                                <label className="info-label">사용자 ID</label>
-                                <div className="info-value">{userData?.id || '제공되지 않음'}</div>
-                            </div>
-                            <div className="info-item">
-                                <label className="info-label">역할</label>
-                                <div className="info-value">
-                                    {userData?.roles?.map(role => role.name).join(', ') || '제공되지 않음'}
-                                </div>
+                            <div>
+                                <div className="text-sm text-gray-600">사용자 ID</div>
+                                <div className="mt-1 p-3 bg-gray-50 rounded">{userData?.id || '제공되지 않음'}</div>
                             </div>
                         </div>
                     </div>
 
-                    {/* 의사 정보 섹션 */}
                     {doctorData && (
-                        <div className="profile-section">
-                            <h2 className="section-title">전문 정보</h2>
-                            <div className="info-grid">
-                                <div className="info-item">
-                                        <label className="info-label">성</label>
-                                        <div className="info-value">{doctorData.lastName || '제공되지 않음'}</div>
+                        <div className="mb-6">
+                            <h2 className="text-xl font-semibold mb-4 border-l-4 border-[#3498db] pl-4">전문 정보</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <div className="text-sm text-gray-600">성</div>
+                                    <div className="mt-1 p-3 bg-gray-50 rounded">{doctorData.lastName || '제공되지 않음'}</div>
                                 </div>
-                                <div className="info-item">
-                                        <label className="info-label">이름</label>
-                                        <div className="info-value">{doctorData.firstName || '제공되지 않음'}</div>
+                                <div>
+                                    <div className="text-sm text-gray-600">이름</div>
+                                    <div className="mt-1 p-3 bg-gray-50 rounded">{doctorData.firstName || '제공되지 않음'}</div>
                                 </div>
-                                <div className="info-item">
-                                        <label className="info-label">전문 분야</label>
-                                        <div className="info-value">{formatSpecialization(doctorData.specialization)}</div>
+                                <div>
+                                    <div className="text-sm text-gray-600">전문 분야</div>
+                                    <div className="mt-1 p-3 bg-gray-50 rounded">{formatSpecialization(doctorData.specialization)}</div>
                                 </div>
-                                <div className="info-item">
-                                        <label className="info-label">의사 ID</label>
-                                        <div className="info-value">{doctorData.id || '제공되지 않음'}</div>
+                                <div>
+                                    <div className="text-sm text-gray-600">의사 ID</div>
+                                    <div className="mt-1 p-3 bg-gray-50 rounded">{doctorData.id || '제공되지 않음'}</div>
                                 </div>
                             </div>
                         </div>
                     )}
 
                     {!doctorData && (
-                        <div className="profile-section">
-                            <div className="alert alert-info">
-                                <p>의사 프로필이 없습니다. 전문 정보를 추가하려면 프로필을 수정하세요.</p>
+                        <div className="mb-6">
+                            <div className="p-4 bg-blue-50 border border-blue-100 rounded">
+                                <p className="text-gray-700">의사 프로필이 없습니다. 전문 정보를 추가하려면 프로필을 수정하세요.</p>
                             </div>
                         </div>
                     )}

@@ -93,114 +93,94 @@ const PatientConsultationHistory = () => {
 
     if(error) {
         return (
-            <div className="container">
-                <div className="form-container">
-                    <div className="alert alert-error">{error}</div>
-                    <button onClick={() => navigate('/doctor/appointments')} className="btn btn-secondary">
-                        예약으로 돌아가기
-                    </button>
+            <div className="min-h-[70vh] flex items-center justify-center">
+                <div className="bg-white p-6 rounded-lg shadow-md text-center w-full max-w-md">
+                    <div className="bg-red-100 border border-red-200 text-red-700 p-3 rounded mb-4">{error}</div>
+                    <button onClick={() => navigate('/doctor/appointments')} className="bg-gray-300 text-gray-800 px-4 py-2 rounded">예약으로 돌아가기</button>
                 </div>
             </div>
         );
     };
     
     return (
-        <div className="container">
-            <div className="page-container">
-                <div className="page-header">
-                    <div className="header-content">
-                        <div>
-                            <h1 className="page-title">환자 상담 기록</h1>
-                            <p className="page-subtitle">
-                                환자 ID: {patientId}
-                            </p>
-                        </div>
-                        <Link to="/doctor/appointments" className="btn btn-secondary">
-                            예약으로 돌아가기
-                        </Link>
+        <div className="max-w-6xl mx-auto px-5 py-8">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="p-6 flex items-center justify-between">
+                    <div>
+                        <h1 className="text-2xl font-semibold">환자 상담 기록</h1>
+                        <p className="text-gray-600">환자 ID: {patientId}</p>
                     </div>
+                    <Link to="/doctor/appointments" className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md">예약으로 돌아가기</Link>
                 </div>
 
                 {/* 통계 요약 */}
                 {consultations.length > 0 && (
-                    <div className="consultation-stats">
-                        <div className="stat-card">
-                            <div className="stat-number">{stats.totalConsultations}</div>
-                            <div className="stat-label">총 상담 수</div>
-                        </div>
-                        <div className="stat-card">
-                            <div className="stat-number">{stats.recentConsultations}</div>
-                            <div className="stat-label">최근 30일</div>
-                        </div>
-                        <div className="stat-card">
-                            <div className="stat-number">
-                                {consultations.length > 0 ? formatDateTime(consultations[0].consultationDate) : 'N/A'}
+                    <div className="p-6 bg-gray-50 border-t border-gray-100">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div className="bg-white p-4 rounded shadow-sm border-l-4 border-[#3498db] text-center">
+                                <div className="text-2xl font-bold">{stats.totalConsultations}</div>
+                                <div className="text-sm text-gray-600">총 상담 수</div>
                             </div>
-                            <div className="stat-label">최신 기록</div>
+                            <div className="bg-white p-4 rounded shadow-sm border-l-4 border-[#3498db] text-center">
+                                <div className="text-2xl font-bold">{stats.recentConsultations}</div>
+                                <div className="text-sm text-gray-600">최근 30일</div>
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-sm border-l-4 border-[#3498db] text-center">
+                                <div className="text-2xl font-bold">{consultations.length > 0 ? formatDateTime(consultations[0].consultationDate) : 'N/A'}</div>
+                                <div className="text-sm text-gray-600">최신 기록</div>
+                            </div>
                         </div>
                     </div>
                 )}
 
                 {consultations.length === 0 ? (
-                    <div className="empty-state">
-                        <h3>상담 기록이 없습니다</h3>
-                        <p>이 환자의 상담 기록이 아직 없습니다.</p>
+                    <div className="p-8 text-center text-gray-600">
+                        <h3 className="text-xl font-semibold">상담 기록이 없습니다</h3>
+                        <p className="mt-2">이 환자의 상담 기록이 아직 없습니다.</p>
                         <p className="mt-1">첫 내원이거나 상담 내용이 아직 기록되지 않았을 수 있습니다.</p>
                     </div>
                 ) : (
-                    <div className="consultation-history">
+                    <div className="p-6">
                         {Object.entries(groupedConsultations).map(([date, dayConsultations]) => (
-                            <div key={date} className="consultation-day-group">
-                                <h3 className="day-header">{date}</h3>
-                                <div className="consultations-list">
+                            <div key={date} className="mb-6">
+                                <h3 className="text-xl font-semibold mb-3">{date}</h3>
+                                <div className="space-y-4">
                                     {dayConsultations.map((consultation) => (
-                                        <div key={consultation.id} className="consultation-card detailed">
-                                            <div className="consultation-header">
-                                                            <div className="consultation-meta">
-                                                                <span className="consultation-time">
-                                                                    {formatDateTime(consultation.consultationDate)}
-                                                                </span>
-                                                                <span className="time-ago">
-                                                                    ({getTimeAgo(consultation.consultationDate)})
-                                                                </span>
-                                                            </div>
-                                                            <div className="consultation-id">
-                                                                예약: #{consultation.appointmentId}
-                                                            </div>
-                                                        </div>
-
-                                            <div className="consultation-sections">
-                                                <div className="consultation-section">
-                                                    <h4>📋 주관적 소견</h4>
-                                                    <div className="section-content">
-                                                        {consultation.subjectiveNotes || '주관적 소견이 없습니다.'}
+                                        <div key={consultation.id} className="bg-white border rounded-lg p-4">
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-3">
+                                                    <div>
+                                                        <div className="text-sm text-gray-600">{formatDateTime(consultation.consultationDate)}</div>
+                                                        <div className="text-xs text-gray-500">({getTimeAgo(consultation.consultationDate)})</div>
                                                     </div>
                                                 </div>
+                                                <div className="text-sm text-gray-600">예약: #{consultation.appointmentId}</div>
+                                            </div>
 
-                                                <div className="consultation-section">
-                                                    <h4>🔍 객관적 소견</h4>
-                                                    <div className="section-content">
-                                                        {consultation.objectiveFindings || '객관적 소견이 없습니다.'}
-                                                    </div>
+                                            <div className="mt-4 grid grid-cols-1 gap-4">
+                                                <div>
+                                                    <h4 className="font-semibold mb-1">📋 주관적 소견</h4>
+                                                    <div className="bg-gray-50 p-3 rounded">{consultation.subjectiveNotes || '주관적 소견이 없습니다.'}</div>
                                                 </div>
 
-                                                <div className="consultation-section">
-                                                    <h4>💊 평가</h4>
-                                                    <div className="section-content">
-                                                        {consultation.assessment || '평가가 없습니다.'}
-                                                    </div>
+                                                <div>
+                                                    <h4 className="font-semibold mb-1">🔍 객관적 소견</h4>
+                                                    <div className="bg-gray-50 p-3 rounded">{consultation.objectiveFindings || '객관적 소견이 없습니다.'}</div>
                                                 </div>
 
-                                                <div className="consultation-section">
-                                                    <h4>📝 치료 계획</h4>
-                                                    <div className="section-content">
-                                                        {consultation.plan || '치료 계획이 없습니다.'}
-                                                    </div>
+                                                <div>
+                                                    <h4 className="font-semibold mb-1">💊 평가</h4>
+                                                    <div className="bg-gray-50 p-3 rounded">{consultation.assessment || '평가가 없습니다.'}</div>
+                                                </div>
+
+                                                <div>
+                                                    <h4 className="font-semibold mb-1">📝 치료 계획</h4>
+                                                    <div className="bg-gray-50 p-3 rounded">{consultation.plan || '치료 계획이 없습니다.'}</div>
                                                 </div>
                                             </div>
 
-                                            <div className="consultation-actions">
-                                                <button className="btn btn-outline btn-sm" onClick={() => {
+                                            <div className="mt-4 text-right">
+                                                <button className="inline-block border border-[#3498db] text-[#3498db] px-3 py-1 rounded" onClick={() => {
                                                     // Highlight patterns or important information
                                                     alert('이 정보를 사용하여 환자의 병력 패턴을 식별하세요');
                                                 }}>
@@ -217,24 +197,24 @@ const PatientConsultationHistory = () => {
 
                 {/* 진단 보조 섹션 */}
                 {consultations.length > 0 && (
-                    <div className="diagnostic-assistance">
-                        <h3>🩺 진단 인사이트</h3>
-                        <div className="insights-grid">
-                            <div className="insight-card">
-                                <h4>반복되는 증상</h4>
-                                <p>여러 상담의 주관적 소견에서 패턴을 찾아보세요</p>
+                    <div className="p-6 bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white rounded-b-lg">
+                        <h3 className="text-lg font-semibold mb-4 text-center">🩺 진단 인사이트</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div className="bg-white/10 p-4 rounded">
+                                <h4 className="font-semibold">반복되는 증상</h4>
+                                <p className="mt-2 text-sm opacity-90">여러 상담의 주관적 소견에서 패턴을 찾아보세요</p>
                             </div>
-                            <div className="insight-card">
-                                <h4>치료 효과</h4>
-                                <p>이전 치료 계획과 결과를 검토하세요</p>
+                            <div className="bg-white/10 p-4 rounded">
+                                <h4 className="font-semibold">치료 효과</h4>
+                                <p className="mt-2 text-sm opacity-90">이전 치료 계획과 결과를 검토하세요</p>
                             </div>
-                            <div className="insight-card">
-                                <h4>경과 추적</h4>
-                                <p>시간에 따른 객관적 소견의 변화를 모니터링하세요</p>
+                            <div className="bg-white/10 p-4 rounded">
+                                <h4 className="font-semibold">경과 추적</h4>
+                                <p className="mt-2 text-sm opacity-90">시간에 따른 객관적 소견의 변화를 모니터링하세요</p>
                             </div>
-                            <div className="insight-card">
-                                <h4>만성 질환 징후</h4>
-                                <p>평가에서 언급된 지속적 문제를 식별하세요</p>
+                            <div className="bg-white/10 p-4 rounded">
+                                <h4 className="font-semibold">만성 질환 징후</h4>
+                                <p className="mt-2 text-sm opacity-90">평가에서 언급된 지속적 문제를 식별하세요</p>
                             </div>
                         </div>
                     </div>

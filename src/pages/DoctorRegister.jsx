@@ -89,53 +89,49 @@ const DoctorRegister = () => {
     };
 
     return (
-        <div className="container">
-            <div className="form-container">
-                <h2 className="form-title">의사 등록</h2>
+        <div className="min-h-[70vh] flex items-center justify-center">
+            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+                <h2 className="text-2xl font-semibold text-center mb-6">의사 등록</h2>
 
                 {error && (
-                    <div className="alert alert-error">
-                        {error}
-                    </div>
+                    <div className="bg-red-100 border border-red-200 text-red-700 p-3 rounded mb-4 text-center">{error}</div>
                 )}
 
                 {success && (
-                    <div className="alert alert-success">
-                        {success}
-                    </div>
+                    <div className="bg-green-100 border border-green-200 text-green-700 p-3 rounded mb-4 text-center">{success}</div>
                 )}
 
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label className="form-label">이름</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">이름</label>
                         <input
                             type="text"
                             name="name"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.name}
                             onChange={handleChange}
                             required
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">이메일</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">이메일</label>
                         <input
                             type="email"
                             name="email"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.email}
                             onChange={handleChange}
                             required
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">비밀번호</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">비밀번호</label>
                         <input
                             type="password"
                             name="password"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.password}
                             onChange={handleChange}
                             required
@@ -143,23 +139,23 @@ const DoctorRegister = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">의사 면허 번호</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">의사 면허 번호</label>
                         <input
                             type="text"
                             name="licenseNumber"
-                            className="form-input"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.licenseNumber}
                             onChange={handleChange}
                             required
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">전문 분야</label>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-[#2c3e50] mb-2">전문 분야</label>
                         <select
                             name="specialization"
-                            className="form-select"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-md"
                             value={formData.specialization}
                             onChange={handleChange}
                             required
@@ -173,25 +169,25 @@ const DoctorRegister = () => {
                             ))}
                         </select>
                         {loadingSpecializations && (
-                            <small>전문 분야 불러오는 중...</small>
+                            <small className="text-gray-500">전문 분야 불러오는 중...</small>
                         )}
                     </div>
 
                     <button
                         type="submit"
-                        className="form-btn"
+                        className="w-full bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white px-4 py-3 rounded-md font-semibold disabled:opacity-60"
                         disabled={loading || loadingSpecializations}
                     >
                         {loading ? '등록 중...' : '의사 등록하기'}
                     </button>
                 </form>
 
-                <div className="form-link">
+                <div className="text-center mt-4 text-sm text-gray-600">
                     <p>
-                        이미 계정이 있으신가요? <Link to="/login">여기서 로그인</Link>
+                        이미 계정이 있으신가요? <Link to="/login" className="text-[#3498db]">여기서 로그인</Link>
                     </p>
-                    <p className="mt-1">
-                        환자로 등록하시겠습니까? <Link to="/register">여기를 클릭하세요</Link>
+                    <p className="mt-2">
+                        환자로 등록하시겠습니까? <Link to="/register" className="text-[#3498db]">여기를 클릭하세요</Link>
                     </p>
                 </div>
             </div>

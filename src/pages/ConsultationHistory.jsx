@@ -47,24 +47,20 @@ const ConsultationHistory = () => {
 
     if (error) {
         return (
-            <div className="container">
-                <div className="form-container">
-                    <div className="alert alert-error">{error}</div>
+            <div className="max-w-6xl mx-auto px-5 py-8">
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                    <div className="bg-red-100 border border-red-200 text-red-700 p-3 rounded">{error}</div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="container">
-            <div className="page-container">
-                <div className="page-header">
-                    <h1 className="page-title">
-                        {appointmentId ? '진료 메모' : '상담 기록'}
-                    </h1>
-                    <Link to="/my-appointments" className="btn btn-secondary">
-                        예약으로 돌아가기
-                    </Link>
+        <div className="max-w-6xl mx-auto px-5 py-8">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="p-6 flex items-center justify-between">
+                    <h1 className="text-2xl font-semibold">{appointmentId ? '진료 메모' : '상담 기록'}</h1>
+                    <Link to="/my-appointments" className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md">예약으로 돌아가기</Link>
                 </div>
                 {
                     consultations.length === 0 ? (
@@ -77,39 +73,37 @@ const ConsultationHistory = () => {
                         </div>
                     ) : (
                         consultations.map((consultation) => (
-                            <div key={consultation.id} className="consultation-card">
-                                <div className="consultation-header">
-                                    <h3>진료 메모</h3>
-                                    <span className="consultation-date">
-                                        {formatDateTime(consultation.consultationDate)}
-                                    </span>
+                            <div key={consultation.id} className="p-6 border-b last:border-b-0">
+                                <div className="flex items-center justify-between">
+                                    <h3 className="text-lg font-semibold">진료 메모</h3>
+                                    <span className="text-sm text-gray-600">{formatDateTime(consultation.consultationDate)}</span>
                                 </div>
 
-                                <div className="consultation-section">
-                                    <h4>주관적 소견</h4>
-                                    <p>{consultation.subjectiveNotes || '주관적 소견이 없습니다.'}</p>
+                                <div className="mt-4">
+                                    <h4 className="font-semibold text-sm mb-1">주관적 소견</h4>
+                                    <p className="bg-gray-50 p-3 rounded">{consultation.subjectiveNotes || '주관적 소견이 없습니다.'}</p>
                                 </div>
 
-                                <div className="consultation-section">
-                                    <h4>객관적 소견</h4>
-                                    <p>{consultation.objectiveFindings || '객관적 소견이 없습니다.'}</p>
+                                <div className="mt-4">
+                                    <h4 className="font-semibold text-sm mb-1">객관적 소견</h4>
+                                    <p className="bg-gray-50 p-3 rounded">{consultation.objectiveFindings || '객관적 소견이 없습니다.'}</p>
                                 </div>
 
-                                <div className="consultation-section">
-                                    <h4>평가</h4>
-                                    <p>{consultation.assessment || '평가가 없습니다.'}</p>
+                                <div className="mt-4">
+                                    <h4 className="font-semibold text-sm mb-1">평가</h4>
+                                    <p className="bg-gray-50 p-3 rounded">{consultation.assessment || '평가가 없습니다.'}</p>
                                 </div>
 
-                                <div className="consultation-section">
-                                    <h4>치료 계획</h4>
-                                    <p>{consultation.plan || '치료 계획이 없습니다.'}</p>
+                                <div className="mt-4">
+                                    <h4 className="font-semibold text-sm mb-1">치료 계획</h4>
+                                    <p className="bg-gray-50 p-3 rounded">{consultation.plan || '치료 계획이 없습니다.'}</p>
                                 </div>
 
                                 {consultation.appointmentId && (
-                                    <div className="consultation-footer">
+                                    <div className="mt-4 text-right">
                                         <Link
                                             to={`/my-appointments`}
-                                            className="btn btn-outline btn-sm"
+                                            className="inline-block border border-[#3498db] text-[#3498db] px-3 py-1 rounded"
                                         >
                                             예약 상세보기
                                         </Link>
