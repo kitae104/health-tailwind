@@ -10,4 +10,9 @@ export default defineConfig({
             "@": path.resolve(__dirname, "./src"),
         },
     },
+    server: {
+        host: '0.0.0.0',
+        port: 3000,
+        strictPort: true, // 3000이 사용 중이면 실행 실패 (자동 변경 방지)
+    },
 });
