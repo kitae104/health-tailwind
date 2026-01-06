@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
     return (
@@ -44,10 +46,22 @@ const Footer = () => {
                 <div className="border-t border-[#34495e] pt-4">
 
                     <div className="flex justify-center gap-4 mb-4">
-                        <a href="#!" className="text-[#bdc3c7] hover:text-[#3498db]">페이스북</a>
-                        <a href="#!" className="text-[#bdc3c7] hover:text-[#3498db]">트위터</a>
-                        <a href="#!" className="text-[#bdc3c7] hover:text-[#3498db]">링크드인</a>
-                        <a href="#!" className="text-[#bdc3c7] hover:text-[#3498db]">인스타그램</a>
+                        <a href="#!" className="flex items-center gap-2 text-[#bdc3c7] hover:text-[#3498db] transition-colors">
+                            <FaFacebook />
+                            <span>페이스북</span>
+                        </a>
+                        <a href="#!" className="flex items-center gap-2 text-[#bdc3c7] hover:text-[#000000] transition-colors">
+                            <FaXTwitter />
+                            <span>트위터</span>
+                        </a>
+                        <a href="#!" className="flex items-center gap-2 text-[#bdc3c7] hover:text-[#0077B5] transition-colors">
+                            <FaLinkedin />
+                            <span>링크드인</span>
+                        </a>
+                        <a href="#!" className="flex items-center gap-2 text-[#bdc3c7] hover:text-[#E4405F] transition-colors">
+                            <FaInstagram />
+                            <span>인스타그램</span>
+                        </a>
                     </div>
 
                     <div className="text-center mt-4">
