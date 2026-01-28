@@ -82,7 +82,7 @@ const CreateConsultation = () => {
             
             const response = await apiService.createConsultation(consultationData);
 
-            if(response.data.statusCode === 201) {
+            if(response.data.statusCode === 200) {
                 setSuccess('상담 기록이 성공적으로 생성되었습니다.');
                 setTimeout(() => {
                     navigate('/doctor/appointments');
