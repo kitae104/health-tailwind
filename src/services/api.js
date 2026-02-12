@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { getApiBaseUrl } from "./apiBase";
 
-const API_BASE_URL = "http://114.71.147.30:28080/api";
+const API_BASE_URL = `${getApiBaseUrl()}/api`;
 // const API_BASE_URL = "http://114.71.147.30:8080/api";
 
 // axios 인스턴스 생성
@@ -9,6 +10,7 @@ const api = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
+    timeout: 15000,
 });
 
 // 요청 인터셉터 설정 
@@ -35,10 +37,12 @@ export const apiService = {
         localStorage.setItem('token', token)    // 토큰 저장
         localStorage.setItem('roles', JSON.stringify(roles)) // 역할 저장
     },
+
     logout: () => {
         localStorage.removeItem('token');
         localStorage.removeItem('roles');
     }, 
+    
     hasRole: (roleName) => {
         const roles = localStorage.getItem('roles');
         return roles ? JSON.parse(roles).includes(roleName) : false;
